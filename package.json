@@ -18,8 +18,6 @@
     "@babel/runtime": "7.13.8",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
-    "eslint": "^8.46.0",
-    "eslint-plugin-react": "^7.33.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
     "loader-utils": "3.2.1",
@@ -42,6 +40,32 @@
     "not op_mini all"
   ],
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "src/**/*.js"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "react/prop-types": "off",
+          "react/display-name": "off",
+          "testing-library/render-result-naming-convention": "off",
+          "no-unused-vars": "error",
+          "no-dupe-keys": "error",
+          "array-callback-return": "error"
+        }
+      }
+    ]
   }
 }
