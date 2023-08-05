@@ -1,9 +1,10 @@
-import * as React from "react";
-import Animate from "./Animate";
-import { niceNumber } from "../utils";
-import { PropTypes } from "prop-types";
+import Animate from './Animate';
+import { niceNumber } from '../utils';
+import { PropTypes } from 'prop-types';
 
-const Card = ({ value, digits = 2, useAnimation = true, unit = "ms" }) => {
+import * as React from 'react';
+
+const Card = ({ value, digits = 2, useAnimation = true, unit = 'ms' }) => {
   const [tmpVal, setTmpVal] = React.useState(0);
   const format = (value) => {
     return niceNumber(value, digits);
@@ -20,7 +21,7 @@ const Card = ({ value, digits = 2, useAnimation = true, unit = "ms" }) => {
         useAnimation={useAnimation}
         format={format}
         onComplete={onComplete}
-      />{" "}
+      />{' '}
       {unit}
     </>
   );
@@ -30,7 +31,7 @@ Card.propTypes = {
   value: PropTypes.number.isRequired,
   digits: PropTypes.number,
   useAnimation: PropTypes.bool,
-  unit: PropTypes.string
+  unit: PropTypes.string,
 };
 
 export default Card;
