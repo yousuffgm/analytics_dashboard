@@ -1,57 +1,31 @@
 import './styles.css';
 import * as React from 'react';
 import moment from 'moment';
-import { generate, getTickerArray } from './utils';
-import Card from './components/Cards';
+import { generate } from './utils';
+import KpiCard from './components/KpiCard';
 import Refresh from './components/Refresh';
-async function gettimeseries() {
-  return {};
-}
-
-function RenderDate({ tickers }) {
-  React.useEffect(() => {
-    gettimeseries();
-  }, []);
-  return (
-    <>
-      {(tickers || []).length > 0 && (
-        <>
-          {' '}
-          <br /> {tickers[0]} - {tickers[tickers.length - 1]}
-        </>
-      )}
-    </>
-  );
-}
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 export default function App() {
-  const bucketSize = 3;
-  const [tickers, setTickers] = React.useState(
-    getTickerArray(moment().startOf('day'), moment(), bucketSize),
-  );
-
+  const bucketSize = 15;
+  const [time, setTime] = React.useState(moment().format());
   const [cardValue, setCardValue] = React.useState(generate());
-
   const onChange = (time) => {
-    setTickers(
-      getTickerArray(moment().startOf('day'), moment(time), bucketSize),
-    );
+    setTime(time);
     setCardValue(generate());
   };
 
   return (
     <div>
-      <Refresh rate={bucketSize * 1000} onChange={onChange} />
-      {moment('2023-08-05T03:37:04+05:30').diff(
-        '2023-08-04T03:36:16+05:30',
-        'hours',
-      )}
-      <RenderDate tickers={tickers} />
+      {time}
       <br />
-
+      <Refresh rate={bucketSize} onChange={onChange} />
       <br />
-
-      <Card value={cardValue} />
+      <KpiCard
+        value={cardValue}
+        title="Content View"
+        icon={<AccessAlarmIcon />}
+      />
     </div>
   );
 }
