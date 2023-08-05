@@ -1,13 +1,13 @@
-import * as React from "react";
-
-export default function Animate({
+import { PropTypes } from 'prop-types';
+import * as React from 'react';
+const Animate = ({
   from,
   to,
   speed = 20,
   useAnimation = true,
   format = (value) => value,
-  onComplete = () => false
-}) {
+  onComplete = () => false,
+}) => {
   const [value, setValue] = React.useState(0);
   React.useEffect(() => {
     if (value === to) {
@@ -43,4 +43,13 @@ export default function Animate({
     };
   }, [from, to, speed, useAnimation]);
   return <> {format(value)} </>;
-}
+};
+Animate.protoType = {
+  from: PropTypes.number.isRequired,
+  to: PropTypes.number.isRequired,
+  speed: PropTypes.number,
+  useAnimation: PropTypes.bool,
+  format: PropTypes.func,
+  onComplete: PropTypes.func,
+};
+export default Animate;

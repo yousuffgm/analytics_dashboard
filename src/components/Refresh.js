@@ -1,5 +1,5 @@
-import * as React from "react";
-import moment from "moment";
+import * as React from 'react';
+import moment from 'moment';
 
 export default function Refresh({ rate, onChange }) {
   const [time, setTime] = React.useState(moment().format());
